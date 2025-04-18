@@ -1,0 +1,40 @@
+<#
+.SYNOPSIS
+    Download, install, and activate Windows Subsystem for Linux (WSL) with Ubuntu.
+
+.DESCRIPTION
+    This script enables required Windows features, installs WSL, sets WSL 2 as default,
+    installs the Ubuntu distribution, and ensures essential build tools are available.
+
+.NOTES
+    - Must be run from an elevated PowerShell (Run as Administrator).
+    - Uses DISM to enable Windows features and the WSL CLI to install distributions.
+
+.EXAMPLE
+    # Enable WSL and Virtual Machine Platform, install WSL and Ubuntu, then update and install build tools
+    .\install_wsl_ubuntu.ps1
+#>
+
+# 1. Enable WSL feature
+dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+
+# 2. Enable Virtual Machine Platform (required for WSL 2)
+dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+
+# 3. Download and install WSL (auto-download via web)
+wsl --install --web-download
+
+# 4. Alternatively, install WSL via PowerShell bypass
+powershell.exe -ExecutionPolicy Bypass -Command "wsl --install"
+
+# 5. Set WSL default version to 2
+wsl --set-default-version 2
+
+# 6. Install Ubuntu distribution
+powershell.exe -ExecutionPolicy Bypass -Command "wsl --install -d Ubuntu"
+
+# 7. Update package lists inside WSL distribution
+wsl sudo apt update
+
+# 8. Install essential build tools (gcc, make, etc.)
+wsl sudo apt install -y build-essential
