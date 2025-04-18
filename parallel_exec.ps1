@@ -31,13 +31,13 @@
 
 .EXAMPLE
     # Basic usage with default placeholder {CTRY} and bypass execution policy:
-    powershell -ExecutionPolicy Bypass -File "$(GBL)parallel_exec.ps1" -RetryCount 3 `
+    powershell -ExecutionPolicy Bypass -File "parallel_exec.ps1" -RetryCount 3 `
         -CommandTemplate "wrk\muscale.exe -cmf tmp\{CTRY}_muin.cmf -los dmp/{CTRY}_muin.log <src_muin.sti >NUL:" `
         usa chn jpn
 
 .EXAMPLE
     # Custom placeholder format {REG}, bypass execution policy:
-    powershell -ExecutionPolicy Bypass -File "$(GBL)parallel_exec.ps1" -RetryCount 2 `
+    powershell -ExecutionPolicy Bypass -File "parallel_exec.ps1" -RetryCount 2 `
         -CommandTemplate "wrk\fit.exe -cmf wrk\{REG}_tbb.cmf >dmp\{REG}_tbb.log" `
         -PlaceholderFormat "{REG}" `
         aus usa eu
