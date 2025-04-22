@@ -38,3 +38,4 @@ wsl sudo apt update
 
 # 8. Install essential build tools (gcc, make, etc.)
 wsl sudo apt install -y build-essential
+wsl sudo apt-get install dos2unix
